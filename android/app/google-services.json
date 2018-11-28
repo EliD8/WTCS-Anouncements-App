@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "643568349221",
+    "firebase_url": "https://wtcs-flutter-app.firebaseio.com",
+    "project_id": "wtcs-flutter-app",
+    "storage_bucket": "wtcs-flutter-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643568349221:android:67ceb1f3501c9084",
+        "android_client_info": {
+          "package_name": "com.example.simplecalendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643568349221-gu9lv8396v81acerm21k9ksg07l8dcbi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo_DHPEMvJBGTY-2Tthc-pcrXGyEx2pp4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

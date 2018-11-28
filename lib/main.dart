@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:datetime_picker_formfield/time_picker_formfield.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 const appName = 'WTCS Anouncements';
 
 void main() => runApp(MaterialApp(
@@ -17,10 +17,10 @@ class MyHomePage extends StatefulWidget {
   @override
   MyHomePageState createState() => MyHomePageState();
 }
-
 class MyHomePageState extends State<MyHomePage> {
-  final dateFormat = DateFormat("EEEE, MMMM d, yyyy");
+  final dateFormat = DateFormat("MMMM d, yyyy");
   DateTime date;
+  
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
@@ -40,8 +40,10 @@ class MyHomePageState extends State<MyHomePage> {
               dateOnly: (true),
             ),
             SizedBox(height: 16.0),
+            
             Text('$date', style: TextStyle(fontSize: 18.0)),
           ],
         ),
       ));
+ 
 }

@@ -40,9 +40,27 @@ class MyHomePageState extends State<MyHomePage> {
               dateOnly: (true),
             ),
             SizedBox(height: 16.0),
-            
             Text('$date', style: TextStyle(fontSize: 18.0)),
-          ],
+            StreamBuilder(
+              stream: Firestore.instance.collection('days').snapshots(),
+              builder: (context, snapshot){
+                
+                if(!snapshot.hasData) return Text('Loading Data');
+                return ListView(
+                  children: <Widget>[
+                    new Expanded(
+                      child: new Text(snapshot.data.documents[0]['testing']),
+                    )
+                    
+                    //Text(snapshot.data.documents[0]['testing'])
+                  ],
+                );
+                
+              
+              },
+            )
+
+          ], 
         ),
       ));
  

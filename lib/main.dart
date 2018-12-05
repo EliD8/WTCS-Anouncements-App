@@ -23,6 +23,7 @@ class MyHomePageState extends State<MyHomePage> {
   
   @override
   Widget build(BuildContext context) => Scaffold(
+    resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text(appName),
         backgroundColor: Colors.green
@@ -38,6 +39,7 @@ class MyHomePageState extends State<MyHomePage> {
               decoration: InputDecoration(labelText: 'Date'),
               onChanged: (dt) => setState(() => date = dt),
               dateOnly: (true),
+              maxLengthEnforced: true,
             ),
             SizedBox(height: 16.0),
             Text('$date', style: TextStyle(fontSize: 18.0)),
@@ -46,13 +48,17 @@ class MyHomePageState extends State<MyHomePage> {
               builder: (context, snapshot){
                 
                 if(!snapshot.hasData) return Text('Loading Data');
-                return ListView(
+                return Column(
                   children: <Widget>[
-                    new Expanded(
-                      child: new Text(snapshot.data.documents[0]['testing']),
-                    )
-                    
-                    //Text(snapshot.data.documents[0]['testing'])
+                    new Container(
+                      alignment: FractionalOffset.topLeft,
+                      child: new Text(snapshot.data.documents[1]['testingThis'],
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
+                      )
+                      
+                      )
                   ],
                 );
                 

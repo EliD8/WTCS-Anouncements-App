@@ -5,6 +5,8 @@ import 'package:datetime_picker_formfield/time_picker_formfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 const appName = 'WTCS Anouncements';
 
+
+
 void main() => runApp(MaterialApp(
       title: appName,
       home: MyHomePage(),
@@ -43,31 +45,46 @@ class MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 16.0),
             Text('$date', style: TextStyle(fontSize: 18.0)),
+            Text(' \nAnnouncements \n', style: TextStyle(fontSize: 30.0)),
+            
+           
             StreamBuilder(
-              stream: Firestore.instance.collection('days').snapshots(),
+              stream: Firestore.instance.collection('days').document(date.toString()).snapshots(),
               builder: (context, snapshot){
                 
-                if(!snapshot.hasData) return Text('Loading Data');
+                print(date);
+                if(!snapshot.hasData) 
+                  {
+                    return Text('Loading Data');
+                }
+
+                if (date == null)
+                {
+                  return Text ('No Data available');
+                }
+
+                if ('[]' == null)
+                {
+                  return Text ('No Data available');
+                }
+              else{
                 return Column(
                   children: <Widget>[
                     new Container(
                       alignment: FractionalOffset.topLeft,
-                      child: new Text(snapshot.data.documents[1]['testingThis'],
+                      child: new Text('${snapshot.data['generic']}',
+                 
                       style: TextStyle(
                         fontSize: 18.0,
                       ),
                       )
-                      
                       )
                   ],
                 );
-                
-              
+              }
               },
             )
-
           ], 
         ),
       ));
- 
 }

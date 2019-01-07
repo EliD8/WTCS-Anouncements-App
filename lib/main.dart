@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
@@ -22,7 +24,9 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   final dateFormat = DateFormat("MMMM d, yyyy");
   DateTime date;
-  
+ 
+
+
   @override
   Widget build(BuildContext context) => Scaffold(
     resizeToAvoidBottomPadding: false,
@@ -47,10 +51,53 @@ class MyHomePageState extends State<MyHomePage> {
             Text('$date', style: TextStyle(fontSize: 18.0)),
             Text(' \nAnnouncements \n', style: TextStyle(fontSize: 30.0)),
             
-           
+            Firestore.instance.collection('days').where("date", isEqualTo: date.toString())
+            .snapshots().listen((data) =>
+              data.documents.forEach((doc) => Text(doc['generic'])))
+      
+          
+       
+          
+       
+       
+       
+       
+    
+         /* StreamBuilder(
+  stream: Firestore.instance.collection("days").snapshots(),
+  builder: (BuildContext context, snapshot) {
+    if (snapshot.hasError)
+      return Text('Error: ${snapshot.error}');
+    switch (snapshot.connectionState) {
+      case ConnectionState.none: return Text('Select a date');
+      case ConnectionState.waiting: return Text('Loading');
+      case ConnectionState.active: 
+      Firestore.instance.collection('days').where("date", isEqualTo: date.toString())
+            .snapshots().listen((data) =>
+              data.documents.forEach((doc) => Text(doc['generic'])));
+     // return Text('\$${snapshot.data}');
+      break;
+      case ConnectionState.done: return Text('\$${snapshot.data} (closed)');
+    }
+    return null; // unreachable
+  },
+          )
+*/
+
+          ]
+        )));
+}
+
+
+    
+
+
+
+/*
             StreamBuilder(
               stream: Firestore.instance.collection('days').document(date.toString()).snapshots(),
               builder: (context, snapshot){
+                
                 
                 print(date);
                 if(!snapshot.hasData) 
@@ -68,23 +115,6 @@ class MyHomePageState extends State<MyHomePage> {
                   return Text ('No Data available');
                 }
               else{
-                return Column(
-                  children: <Widget>[
-                    new Container(
-                      alignment: FractionalOffset.topLeft,
-                      child: new Text('${snapshot.data['generic']}',
-                 
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                      )
-                      )
-                  ],
-                );
+                  //Something here
               }
-              },
-            )
-          ], 
-        ),
-      ));
-}
+              },*/

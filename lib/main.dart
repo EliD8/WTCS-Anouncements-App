@@ -57,7 +57,10 @@ class MyHomePageState extends State<MyHomePage> {
         date.toString()).snapshots(),
         builder: (BuildContext context, 
               AsyncSnapshot<QuerySnapshot> snapshot) {
-              return Text('${snapshot.data}');
+                if(!snapshot.hasData){
+                  return Text('Im dat nigga');
+                }
+              return Text('${snapshot.data.documents[0]['generic']}');
               }
 )
       

@@ -51,13 +51,21 @@ class MyHomePageState extends State<MyHomePage> {
             Text('$date', style: TextStyle(fontSize: 18.0)),
             Text(' \nAnnouncements \n', style: TextStyle(fontSize: 30.0)),
             
-            Firestore.instance.collection('days').where("date", isEqualTo: date.toString())
+
+          StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection('days').where("date", isEqualTo:
+        date.toString()).snapshots(),
+        builder: (BuildContext context, 
+              AsyncSnapshot<QuerySnapshot> snapshot) {
+              return Text('${snapshot.data}');
+              }
+)
+      
+        /*  
+         Firestore.instance.collection('days').where("date", isEqualTo: date.toString())
             .snapshots().listen((data) =>
               data.documents.forEach((doc) => Text(doc['generic'])))
-      
-          
-       
-          
+          */
        
        
        
@@ -83,7 +91,6 @@ class MyHomePageState extends State<MyHomePage> {
   },
           )
 */
-
           ]
         )));
 }

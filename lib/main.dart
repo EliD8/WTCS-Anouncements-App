@@ -58,10 +58,12 @@ class MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context, 
               AsyncSnapshot<QuerySnapshot> snapshot) {
                 if(!snapshot.hasData){
-                  return Text('Im dat nigga');
+                  return Text('ya YEET');
                 }
               return Text('${snapshot.data.documents[0]['generic']}');
               }
+              
+        
 )
       
         /*  

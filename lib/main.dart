@@ -21,18 +21,7 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
   final dateFormat = DateFormat("MMMM d, yyyy");
-  DateTime date ;
-  
-  // getAnouncement(DateTime date){
-  //   Firestore.instance
-  //       .collection('days')
-  //       .where('date', isEqualTo: date.toString())
-  //       .getDocuments().then((QuerySnapshot docs){
-  //         if(DocumentSnapshot.hasData){
-
-  //         }
-  //       })
-  // }
+  DateTime date;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -51,18 +40,20 @@ class MyHomePageState extends State<MyHomePage> {
               dateOnly: (true),
               maxLengthEnforced: true,
             ),
-            Text(' \nAnnouncements \n', style: TextStyle(fontSize: 30.0)),
-             StreamBuilder(
+            Text("\n"),
+            StreamBuilder(
                 stream: Firestore.instance.collection('days').snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) return CircularProgressIndicator();
-                  if(snapshot.data.documents[0][date.toString()] == null){
-                    return Text("No Anouncements Today");
+                  if (snapshot.data.documents[0][date.toString()] == null) {
+                    return Text(
+                      "No Anouncements Today",
+                      style: TextStyle(fontSize: 20.0),
+                    );
                   }
-                  return Text(snapshot.data.documents[0][date.toString()]??'');
-})
+                  return Text(snapshot.data.documents[0][date.toString()].replaceAll("\\n", "\n") ?? '',
+                      style: TextStyle(fontSize: 20));
+                })
           ])));
 }
-
-
